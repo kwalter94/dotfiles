@@ -1,0 +1,1 @@
+/home/kwalter/.asdf/completions/asdf.fish
