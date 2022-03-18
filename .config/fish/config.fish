@@ -44,4 +44,4 @@ bass 'source /home/kwalter/.asdf/installs/rust/1.59.0/env'
 
 set -x GOPATH $HOME
 set -x DOTFILES_REPOSITORY ~/src/github.com/kwalter94/dotfiles
-
+set -x EDITOR (which nvim)
