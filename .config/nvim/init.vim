@@ -3,6 +3,7 @@ let &packpath = &runtimepath
 
 source ~/.vimrc
 
+set bg=dark
 colorscheme industry
 
 set path+=**
@@ -24,6 +25,7 @@ call plug#begin(stdpath('data') . 'plugged')
     Plug 'vim-crystal/vim-crystal'
     Plug 'RishabhRD/popfix'
     Plug 'mhinz/vim-startify'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
     " Debugging
     Plug 'nvim-lua/plenary.nvim'
@@ -71,4 +73,4 @@ EOF
 " Neovide
 let g:neovide_transparency=0.9
 let g:neovide_fullscreen=v:true
-set guifont=FiraCode:h8
+set guifont=Fira\ Code:h12
