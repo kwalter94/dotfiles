@@ -60,6 +60,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_python_checkers = ['pylint', 'mypy']
 
 " NerdTree
 let g:NERDTreeShowHidden=1
@@ -79,6 +80,7 @@ nnoremap <C-`> :split term://fish<CR><C-w>ri
 " Blamer
 let g:blamer_enabled = 1
 
+" LSP Configs
 lua << EOF
     -- LSP Mappings copied verbatim from: https://github.com/neovim/nvim-lspconfig#suggested-configuration
     -- See `:help vim.diagnostic.*` for documentation on any of the below functions
