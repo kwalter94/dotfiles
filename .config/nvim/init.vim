@@ -3,6 +3,8 @@ let &packpath = &runtimepath
 
 source ~/.vimrc
 
+let g:python3_host_prog=$HOME . "/.local/nvim/python3/bin/python"
+
 set path+=**
 set wildmenu
 
