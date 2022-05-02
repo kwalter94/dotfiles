@@ -3,7 +3,7 @@ let &packpath = &runtimepath
 
 source ~/.vimrc
 
-let g:python3_host_prog=$HOME . "/.local/nvim/python3/bin/python"
+let g:python3_host_prog=$HOME . "/.local/share/nvim/python3/bin/python"
 
 set path+=**
 set wildmenu
@@ -73,6 +73,7 @@ set number
 set fillchars+=vert:\|
 hi vertsplit guifg=fg guibg=bg
 set linespace=0
+let g:rustfmt_autosave = 1
 
 " Remaps
 tnoremap <ESC> <C-\><C-n>
@@ -130,6 +131,6 @@ lua << EOF
 EOF
 
 " Neovide
-let g:neovide_transparency=0.9
+" let g:neovide_transparency=0.95
 let g:neovide_fullscreen=v:true
 set guifont=Fira\ Code:h12
