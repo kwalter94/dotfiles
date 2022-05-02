@@ -21,6 +21,8 @@ end
 
 function poetry-venv-activate
     set venv_path (poetry env info --path)
+    set -gx VIRTUAL_ENV_DISABLE_PROMPT true
+
     source $venv_path/bin/activate.fish
 end
 
