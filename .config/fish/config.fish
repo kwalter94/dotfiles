@@ -19,6 +19,11 @@ function kubectl
     minikube kubectl -- $argv
 end
 
+function poetry-venv-activate
+    set venv_path (poetry env info --path)
+    source $venv_path/bin/activate.fish
+end
+
 if [ $TILIX_ID ] || [ $VTE_VERSION ]
     bass 'source /etc/profile.d/vte-2.91.sh'
 end
