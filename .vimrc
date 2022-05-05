@@ -1,3 +1,5 @@
+filetype plugin on
+
 set bg=dark
 
 set tabstop=4
