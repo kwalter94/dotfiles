@@ -26,6 +26,15 @@ function poetry-venv-activate
     source $venv_path/bin/activate.fish
 end
 
+function cpp-run
+    set program_name (echo $argv[1] | sed -nE 's/(.*)\.(.*)/\1/p')
+
+    g++ -Wall $1 -o $program_name $argv[1]
+    chmod +x $program_name
+
+    ./$program_name
+end
+
 if [ $TILIX_ID ] || [ $VTE_VERSION ]
     bass 'source /etc/profile.d/vte-2.91.sh'
 end
