@@ -63,7 +63,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = ['pylint', 'mypy']
-
+  
 " NerdTree
 let g:NERDTreeShowHidden=1
 
@@ -131,6 +131,6 @@ lua << EOF
 EOF
 
 " Neovide
-" let g:neovide_transparency=0.95
+let g:neovide_transparency=0.95
 let g:neovide_fullscreen=v:true
 set guifont=Fira\ Code:h12
