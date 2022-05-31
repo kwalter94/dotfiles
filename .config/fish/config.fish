@@ -19,7 +19,7 @@ function kubectl
     minikube kubectl -- $argv
 end
 
-function poetry-venv-activate
+function activate-poetry-env
     set venv_path (poetry env info --path)
     set -gx VIRTUAL_ENV_DISABLE_PROMPT true
 
