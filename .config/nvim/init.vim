@@ -130,7 +130,7 @@ lua << EOF
     end
 
     require('lspconfig').elixirls.setup {
-        cmd = { '/home/kwalter/.local/share/elixir-ls' }
+        cmd = { '/home/kwalter/.local/share/elixir-ls/language_server.sh' }
     }
 EOF
 
