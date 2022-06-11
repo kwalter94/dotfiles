@@ -128,6 +128,10 @@ lua << EOF
         }
       }
     end
+
+    require('lspconfig').elixirls.setup {
+        cmd = { '/home/kwalter/.local/share/elixir-ls' }
+    }
 EOF
 
 " Neovide
