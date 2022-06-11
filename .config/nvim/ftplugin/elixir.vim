@@ -1,0 +1,1 @@
+/home/kwalter/.config/nvim/ftplugin/crystal.vim
