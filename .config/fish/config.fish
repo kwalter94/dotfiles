@@ -1,5 +1,5 @@
 function fish_greeting
-    fortune | cowsay -f (ls /usr/share/cowsay/cows | shuf -n 1) | lolcat
+    fortune -a | cowsay -f (ls /usr/share/cowsay/cows | shuf -n 1) | lolcat
 end
 
 if not contains $HOME/bin $PATH
@@ -13,10 +13,6 @@ if not set -q ANDROID_HOME
     set -gx PATH $ANDROID_HOME/tools $PATH 
     set -gx PATH $ANDROID_HOME/tools/bin $PATH 
     set -gx PATH $ANDROID_HOME/platform-tools $PATH 
-end
-
-function kubectl
-    minikube kubectl -- $argv
 end
 
 function activate-poetry-env

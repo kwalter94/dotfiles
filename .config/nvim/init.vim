@@ -70,6 +70,7 @@ let g:NERDTreeShowHidden=1
 " autocmd vimenter * NERDTree
 set mouse=a
 set number
+set relativenumber
 set fillchars+=vert:\|
 hi vertsplit guifg=fg guibg=bg
 set linespace=0
@@ -136,5 +137,5 @@ EOF
 
 " Neovide
 let g:neovide_transparency=0.95
-let g:neovide_fullscreen=v:true
+" let g:neovide_fullscreen=v:true
 set guifont=Fira\ Code:h12
