@@ -31,7 +31,7 @@ function cpp-run
     ./$program_name
 end
 
-if [ $TILIX_ID ] || [ $VTE_VERSION ]
+if [ $TILIX_ID ] || [ $VTE_VERSION ] && [ -e "/etc/profile.d/vte-2.91.sh" ]
     bass 'source /etc/profile.d/vte-2.91.sh'
 end
 
