@@ -1,5 +1,5 @@
 function fish_greeting
-    fortune -a | cowsay -f (ls /usr/share/cowsay/cows | shuf -n 1) | lolcat
+    fortune -a | cowsay -f (ls /usr/share/cowsay/cows/*.cow | shuf -n 1) | lolcat
 end
 
 if not contains $HOME/bin $PATH
