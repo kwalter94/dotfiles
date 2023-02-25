@@ -92,7 +92,8 @@ let g:rustfmt_autosave = 1
 tnoremap <ESC> <C-\><C-n>
 nnoremap <C-f> :NERDTreeFind<CR>
 nnoremap <C-`> :split term://fish<CR><C-w>ri
-nnoremap <C-?> :ALEHover<CR>
+nnoremap <C-h> :ALEHover<CR>
+nnoremap <C-\> :FZF<CR>
 
 " Blamer
 let g:blamer_enabled = 1
@@ -150,5 +151,5 @@ EOF
 
 " Neovide
 let g:neovide_transparency=0.95
-" let g:neovide_fullscreen=v:true
+let g:neovide_fullscreen=v:true
 set guifont=Fira\ Code:h12
