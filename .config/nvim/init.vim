@@ -16,8 +16,9 @@ endif
 
 call plug#begin(stdpath('data') . 'plugged')
     Plug 'preservim/nerdtree'
+    Plug 'scrooloose/nerdcommenter'
     Plug 'rust-lang/rust.vim'
-    Plug 'vim-syntastic/syntastic'
+    Plug 'dense-analysis/ale'
     Plug 'elixir-editors/vim-elixir'
     Plug 'APZelos/blamer.nvim'
     Plug 'mhinz/vim-mix-format'
@@ -63,15 +64,20 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-" Syntastic
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_python_checkers = ['pylint', 'mypy']
+" ALE
+let g:ale_fix_on_save = 1
+let g:ale_hover_cursor = 1
+let g:ale_fixers = {
+\    'go': ['go fmt'],
+\    'python': ['pylint', 'mypy'],
+\}
   
 " NerdTree
 let g:NERDTreeShowHidden=1
+
+" NerdCommenter
+let g:NERDCreateDefaultMappings = 1
+let g:NERDSpaceDelims = 1
 
 " autocmd vimenter * NERDTree
 set mouse=a
@@ -86,6 +92,7 @@ let g:rustfmt_autosave = 1
 tnoremap <ESC> <C-\><C-n>
 nnoremap <C-f> :NERDTreeFind<CR>
 nnoremap <C-`> :split term://fish<CR><C-w>ri
+nnoremap <C-?> :ALEHover<CR>
 
 " Blamer
 let g:blamer_enabled = 1
