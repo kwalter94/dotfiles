@@ -69,7 +69,7 @@ let g:ale_fix_on_save = 1
 let g:ale_hover_cursor = 1
 let g:ale_fixers = {
 \    'go': ['go fmt'],
-\    'python': ['pylint', 'mypy'],
+\    'python': ['black'],
 \}
   
 " NerdTree
@@ -151,5 +151,5 @@ EOF
 
 " Neovide
 let g:neovide_transparency=0.95
-let g:neovide_fullscreen=v:true
+let g:neovide_fullscreen=v:false
 set guifont=Fira\ Code:h12
