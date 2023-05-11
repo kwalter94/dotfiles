@@ -31,6 +31,7 @@ call plug#begin(stdpath('data') . 'plugged')
     Plug 'RishabhRD/popfix'
     Plug 'mhinz/vim-startify'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'tpope/vim-fugitive'
 
     " Themes
     Plug 'EdenEast/nightfox.nvim'
