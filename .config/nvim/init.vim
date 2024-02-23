@@ -15,33 +15,39 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 call plug#begin(stdpath('data') . 'plugged')
-    Plug 'preservim/nerdtree'
-    Plug 'scrooloose/nerdcommenter'
-    Plug 'rust-lang/rust.vim'
+    " Global deps
+    Plug 'nvim-lua/plenary.nvim'
+
+    " Syntax + Formating
     Plug 'dense-analysis/ale'
+    Plug 'scrooloose/nerdcommenter'
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+    " Lang tools
+    Plug 'rust-lang/rust.vim'
+    Plug 'simrat39/rust-tools.nvim'
     Plug 'elixir-editors/vim-elixir'
+    Plug 'vim-crystal/vim-crystal'
+    Plug 'mfussenegger/nvim-dap'
+
+    " Utilities
+    Plug 'preservim/nerdtree'
+    Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'APZelos/blamer.nvim'
+    Plug 'tpope/vim-fugitive'
     Plug 'mhinz/vim-mix-format'
     Plug 'neovim/nvim-lspconfig'
-    Plug 'simrat39/rust-tools.nvim'
-    Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'vim-airline/vim-airline'
-    Plug 'vim-crystal/vim-crystal'
     Plug 'RishabhRD/popfix'
     Plug 'mhinz/vim-startify'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-    Plug 'tpope/vim-fugitive'
+    Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
 
-    " Themes
+    " Theming
     Plug 'EdenEast/nightfox.nvim'
     Plug 'seblj/nvim-tabline'
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'ryanoasis/vim-devicons'
-
-    " Debugging
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'mfussenegger/nvim-dap'
 call plug#end()
 
 " Theming
@@ -63,7 +69,6 @@ require('tabline').setup{
 EOF
 
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 " ALE
@@ -187,6 +192,12 @@ lua << EOF
             enable = true
         },
     }
+
+    local builtin = require('telescope.builtin')
+    vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+    vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+    vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+    vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 EOF
 
 " Neovide
