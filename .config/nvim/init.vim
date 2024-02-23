@@ -24,19 +24,20 @@ call plug#begin(stdpath('data') . 'plugged')
     Plug 'mhinz/vim-mix-format'
     Plug 'neovim/nvim-lspconfig'
     Plug 'simrat39/rust-tools.nvim'
-    Plug 'ryanoasis/vim-devicons'
     Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-crystal/vim-crystal'
     Plug 'RishabhRD/popfix'
     Plug 'mhinz/vim-startify'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'tpope/vim-fugitive'
 
     " Themes
     Plug 'EdenEast/nightfox.nvim'
     Plug 'seblj/nvim-tabline'
     Plug 'kyazdani42/nvim-web-devicons'
+    Plug 'ryanoasis/vim-devicons'
 
     " Debugging
     Plug 'nvim-lua/plenary.nvim'
@@ -69,7 +70,7 @@ set statusline+=%*
 let g:ale_fix_on_save = 1
 let g:ale_hover_cursor = 1
 let g:ale_fixers = {
-\    'go': ['go fmt'],
+\    'go': ['gofmt'],
 \    'python': ['black'],
 \}
   
@@ -99,8 +100,11 @@ nnoremap <C-\> :FZF<CR>
 " Blamer
 let g:blamer_enabled = 1
 
-" LSP Configs
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+
 lua << EOF
+    -- LSP config
     -- LSP Mappings copied verbatim from: https://github.com/neovim/nvim-lspconfig#suggested-configuration
     -- See `:help vim.diagnostic.*` for documentation on any of the below functions
     local opts = { noremap=true, silent=true }
@@ -147,6 +151,41 @@ lua << EOF
 
     require('lspconfig').elixirls.setup {
         cmd = { '/home/kwalter/.local/share/elixir-ls/language_server.sh' }
+    }
+
+    -- Treesitter
+    require'nvim-treesitter.configs'.setup {
+        ensure_installed = {
+            "c",
+            "lua",
+            "vim",
+            "vimdoc",
+            "query",
+            "bash",
+            "css",
+            "diff",
+            "dockerfile",
+            "fish",
+            "go",
+            "javascript",
+            "make",
+            "markdown",
+            "python",
+            "ruby",
+            "rust",
+            "sql",
+            "typescript",
+            "yaml",
+        },
+        sync_install = false,
+        auto_install = true,
+        highlight = {
+            enable = true,
+            additional_vim_regex_highlighting = false,
+        },
+        indent = {
+            enable = true
+        },
     }
 EOF
 
