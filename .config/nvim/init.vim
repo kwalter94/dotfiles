@@ -263,5 +263,5 @@ EOF
 
 " Neovide
 let g:neovide_transparency=0.95
-let g:neovide_fullscreen=v:true
+let g:neovide_fullscreen=v:false
 set guifont=Fira\ Code:h12
