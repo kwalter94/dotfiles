@@ -20,9 +20,15 @@ let g:ale_fixers = {
 \    'go': ['gofmt'],
 \    'python': ['black'],
 \}
-let g:ale_completion_enabled = 1
+
+let g:ale_floating_preview = 1
+let g:ale_hover_to_preview = 1
 let g:ale_hover_to_floating_preview = 1
-let g:airline#extensions#ale#enabled = 1
+let g:ale_detail_to_floating_preview = 1
+let g:ale_close_preview_on_insert = 0
+let g:ale_cursor_detail = 1
+let g:ale_floating_cursor = 1
+let g:airline#extensions#ale#enabled = 0
  
 call plug#begin(stdpath('data') . 'plugged')
     " Global deps
@@ -32,6 +38,10 @@ call plug#begin(stdpath('data') . 'plugged')
     Plug 'dense-analysis/ale'
     Plug 'scrooloose/nerdcommenter'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'hrsh7th/nvim-cmp'
+    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'saadparwaiz1/cmp_luasnip'
+    Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'}
 
     " Lang tools
     Plug 'rust-lang/rust.vim'
@@ -112,10 +122,10 @@ let g:blamer_enabled = 1
 
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
+set nofoldenable
 
 lua << EOF
     -- LSP config
-    -- LSP Mappings copied verbatim from: https://github.com/neovim/nvim-lspconfig#suggested-configuration
     -- See `:help vim.diagnostic.*` for documentation on any of the below functions
     local opts = { noremap=true, silent=true }
     vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
@@ -146,25 +156,26 @@ lua << EOF
       vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
     end
 
+    local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+
     -- Use a loop to conveniently call 'setup' on multiple servers and
     -- map buffer local keybindings when the language server attaches
     local servers = { 'crystalline', 'gopls', 'pyright', 'rust_analyzer', 'tsserver' }
     for _, lsp in pairs(servers) do
       require('lspconfig')[lsp].setup {
         on_attach = on_attach,
-        flags = {
-          -- This will be the default in neovim 0.7+
-          debounce_text_changes = 150,
-        }
+        capabilities = cmp_capabilities
       }
     end
 
     require('lspconfig').elixirls.setup {
-        cmd = { '/home/kwalter/.local/share/elixir-ls/language_server.sh' }
+        cmd = { '/home/kwalter/.local/share/elixir-ls/language_server.sh' },
+        on_attach = on_attach,
+        capabilities = cmp_capabilities
     }
 
     -- Treesitter
-    require'nvim-treesitter.configs'.setup {
+    require('nvim-treesitter.configs').setup {
         ensure_installed = {
             "c",
             "lua",
@@ -203,9 +214,54 @@ lua << EOF
     vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
     vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
     vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+
+    -- LuaSnip
+    local luasnip = require('luasnip')
+
+    -- nvim-cmp
+    local cmp = require('cmp')
+    cmp.setup {
+      snippet = {
+        expand = function(args)
+          luasnip.lsp_expand(args.body)
+        end,
+      },
+      mapping = cmp.mapping.preset.insert({
+        ['<C-u>'] = cmp.mapping.scroll_docs(-4), -- Up
+        ['<C-d>'] = cmp.mapping.scroll_docs(4), -- Down
+        -- C-b (back) C-f (forward) for snippet placeholder navigation.
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<CR>'] = cmp.mapping.confirm {
+          behavior = cmp.ConfirmBehavior.Replace,
+          select = true,
+        },
+        ['<Tab>'] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          else
+            fallback()
+          end
+        end, { 'i', 's' }),
+        ['<S-Tab>'] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+          else
+            fallback()
+          end
+        end, { 'i', 's' }),
+      }),
+      sources = {
+        { name = 'nvim_lsp' },
+        { name = 'luasnip' },
+      },
+    }
 EOF
 
 " Neovide
 let g:neovide_transparency=0.95
-let g:neovide_fullscreen=v:false
+let g:neovide_fullscreen=v:true
 set guifont=Fira\ Code:h12
