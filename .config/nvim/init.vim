@@ -160,7 +160,14 @@ lua << EOF
 
     -- Use a loop to conveniently call 'setup' on multiple servers and
     -- map buffer local keybindings when the language server attaches
-    local servers = { 'crystalline', 'gopls', 'pyright', 'rust_analyzer', 'tsserver' }
+    local servers = {
+        'crystalline',
+        'gopls',
+        'pyright',
+        'rust_analyzer',
+        'svelte',
+        'tsserver',
+    }
     for _, lsp in pairs(servers) do
       require('lspconfig')[lsp].setup {
         on_attach = on_attach,
