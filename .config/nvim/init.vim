@@ -19,6 +19,7 @@ let g:ale_fix_on_save = 1
 let g:ale_fixers = {
 \    'go': ['gofmt'],
 \    'python': ['black'],
+\    '*': ['remove_trailing_lines', 'trim_whitespace'],
 \}
 
 let g:ale_floating_preview = 1
@@ -29,7 +30,7 @@ let g:ale_close_preview_on_insert = 0
 let g:ale_cursor_detail = 1
 let g:ale_floating_cursor = 1
 let g:airline#extensions#ale#enabled = 0
- 
+
 call plug#begin(stdpath('data') . 'plugged')
     " Global deps
     Plug 'nvim-lua/plenary.nvim'
@@ -76,6 +77,9 @@ set omnifunc=ale#completion#omniFunc
 " Theming
 set bg=dark
 colorscheme nightfox
+let g:neovide_transparency=0.95
+let g:neovide_fullscreen=v:false
+set guifont=Fira\ Code:h12
 
 lua <<EOF
 require('tabline').setup{
@@ -93,13 +97,15 @@ EOF
 
 set statusline+=%#warningmsg#
 set statusline+=%*
- 
+
 " NerdTree
 let g:NERDTreeShowHidden=1
 
 " NerdCommenter
 let g:NERDCreateDefaultMappings = 1
 let g:NERDSpaceDelims = 1
+let g:NERDDefaultAlign = "left"
+let g:NERDTrimTrailingWhitespace = 1
 
 " autocmd vimenter * NERDTree
 set mouse=a
@@ -267,8 +273,3 @@ lua << EOF
       },
     }
 EOF
-
-" Neovide
-let g:neovide_transparency=0.95
-let g:neovide_fullscreen=v:false
-set guifont=Fira\ Code:h12
