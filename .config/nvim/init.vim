@@ -7,6 +7,7 @@ let g:python3_host_prog=$HOME . "/.local/share/nvim/python3/bin/python"
 
 set path+=**
 set wildmenu
+set hlsearch
 
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
