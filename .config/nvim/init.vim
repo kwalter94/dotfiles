@@ -79,7 +79,7 @@ set omnifunc=ale#completion#omniFunc
 set bg=dark
 colorscheme nightfox
 let g:neovide_transparency=0.95
-let g:neovide_fullscreen=v:false
+let g:neovide_fullscreen=v:true
 set guifont=Fira\ Code:h12
 
 lua <<EOF
