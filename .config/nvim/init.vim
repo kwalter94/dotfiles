@@ -83,6 +83,14 @@ let g:neovide_fullscreen=v:true
 set guifont=Fira\ Code:h12
 
 lua <<EOF
+if vim.g.neovide then
+    vim.keymap.set({ "n", "v" }, "<C-+>", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>")
+    vim.keymap.set({ "n", "v" }, "<C-_>", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>")
+    vim.keymap.set({ "n", "v" }, "<C-)>", ":lua vim.g.neovide_scale_factor = 1<CR>")
+end
+EOF
+
+lua <<EOF
 require('tabline').setup{
     no_name = '[No Name]',    -- Name for buffers with no name
     modified_icon = '',      -- Icon for showing modified buffer
