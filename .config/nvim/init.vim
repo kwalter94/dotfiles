@@ -9,6 +9,9 @@ set path+=**
 set wildmenu
 set hlsearch
 
+" Custom commands
+command KeepCurrentBuffer :%bd|e#
+
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
   silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -18,6 +21,7 @@ endif
 " ALE
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
+\    'elm': ['elm_ls'],
 \    'go': ['gofmt'],
 \    'python': ['black'],
 \    '*': ['remove_trailing_lines', 'trim_whitespace'],
@@ -79,7 +83,7 @@ set omnifunc=ale#completion#omniFunc
 set bg=dark
 colorscheme nightfox
 let g:neovide_transparency=0.95
-let g:neovide_fullscreen=v:true
+" let g:neovide_fullscreen=v:true
 set guifont=Fira\ Code:h12
 
 lua <<EOF
@@ -177,6 +181,7 @@ lua << EOF
     -- map buffer local keybindings when the language server attaches
     local servers = {
         'crystalline',
+        'elmls',
         'gopls',
         'pyright',
         'rust_analyzer',
