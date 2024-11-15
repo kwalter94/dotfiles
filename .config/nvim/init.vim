@@ -66,7 +66,6 @@ call plug#begin(stdpath('data') . 'plugged')
     Plug 'vim-airline/vim-airline'
     Plug 'RishabhRD/popfix'
     Plug 'mhinz/vim-startify'
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
 
     " Theming
@@ -83,7 +82,7 @@ set omnifunc=ale#completion#omniFunc
 set bg=dark
 colorscheme nightfox
 let g:neovide_transparency=0.95
-" let g:neovide_fullscreen=v:true
+let g:neovide_fullscreen=v:false
 set guifont=Fira\ Code:h12
 
 lua <<EOF
@@ -134,7 +133,6 @@ tnoremap <ESC> <C-\><C-n>
 nnoremap <C-f> :NERDTreeFind<CR>
 nnoremap <C-`> :split term://fish<CR><C-w>ri
 nnoremap <C-h> :ALEHover<CR>
-nnoremap <C-\> :FZF<CR>
 
 " Blamer
 let g:blamer_enabled = 1
@@ -186,7 +184,7 @@ lua << EOF
         'pyright',
         'rust_analyzer',
         'svelte',
-        'tsserver',
+        'ts_ls',
     }
     for _, lsp in pairs(servers) do
       require('lspconfig')[lsp].setup {
