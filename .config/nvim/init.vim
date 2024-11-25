@@ -67,6 +67,7 @@ call plug#begin(stdpath('data') . 'plugged')
     Plug 'RishabhRD/popfix'
     Plug 'mhinz/vim-startify'
     Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
+    Plug 'stevearc/oil.nvim'
 
     " Theming
     Plug 'EdenEast/nightfox.nvim'
@@ -74,6 +75,7 @@ call plug#begin(stdpath('data') . 'plugged')
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'ryanoasis/vim-devicons'
 call plug#end()
+
 
 " More ale
 set omnifunc=ale#completion#omniFunc
@@ -94,6 +96,8 @@ end
 EOF
 
 lua <<EOF
+require("oil").setup()
+
 require('tabline').setup{
     no_name = '[No Name]',    -- Name for buffers with no name
     modified_icon = '',      -- Icon for showing modified buffer
